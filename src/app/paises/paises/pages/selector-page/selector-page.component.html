@@ -1,0 +1,62 @@
+<div class="container">
+
+    <h1 class="mt-5"> Selectores anidados</h1>
+
+
+
+    <form [formGroup]="miFormulario" (ngSubmit)="guardar()">
+
+        <!--Region-->
+        <div class="row">
+            <div class="col">
+                <label for="form-label"> Continente</label>
+                <select formControlName="region" class="form-control">
+                    <option value=''>-- Seleccione continente --</option>
+                    <option *ngFor="let region of regiones "
+                            [value]= "region | lowercase">{{region}}</option>
+                </select>
+            </div>
+        </div>
+
+            <!--Pais-->
+            <div class="row" *ngIf="paises.length !== 0">   <!---->
+                <div class="col">
+                    <label for="form-label"> Pais</label>
+                    <select formControlName="pais" class="form-control">
+                        <option value=''>-- Seleccione continente --</option>
+                        <option *ngFor="let pais of paises "
+                                [value]= "pais.alpha3Code">{{pais.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+               <!--Pais-->
+               <div class="row" *ngIf="fronteras.length > 0">
+                <div class="col">
+                    <label for="form-label"> Fronteras</label>
+                    <select formControlName="frontera" class="form-control">
+                        <option value=''>-- Seleccione el pais fronterizo--</option>
+                        <option *ngFor="let frontera of fronteras "
+                                [value]= "frontera">{{frontera}}</option> 
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="cargando">
+                <div class="col">
+                    <div class="alert alert-primary">
+                        Cargando..
+                    </div>
+                </div>
+            </div>
+
+            <br>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary float-end"> Seleccionar</button>
+            </div>
+        </div>
+    </form>
+
+</div>
